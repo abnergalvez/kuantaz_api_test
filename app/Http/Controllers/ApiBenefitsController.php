@@ -10,7 +10,6 @@ use App\Contracts\ProfilesServiceContract;
 
 class ApiBenefitsController extends Controller
 {
-
     protected $benefitsService;
     protected $filtersService;
     protected $profilesService;
@@ -25,7 +24,7 @@ class ApiBenefitsController extends Controller
         $this->filtersService = $filtersService;
         $this->profilesService = $profilesService;
     }
-    public function index()
+    public function index() // TODO: typo here
     {
         try {
             $benefits = collect($this->benefitsService->getBenefits());
@@ -62,6 +61,7 @@ class ApiBenefitsController extends Controller
                 'data' => $result->values()->toArray()
             ]);
         } catch (\Throwable $th) {
+            // TODO: handle exception
         }
     }
 }
