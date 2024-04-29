@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Contracts\BeneficiosServiceContract;
-use App\Services\HttpBeneficiosService;
+use App\Contracts\BenefitsServiceContract;
+use App\Contracts\FiltersServiceContract;
+use App\Contracts\ProfilesServiceContract;
+use App\Services\HttpBenefitsService;
+use App\Services\HttpFiltersService;
+use App\Services\HttpProfilesService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,8 +18,18 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            BeneficiosServiceContract::class,
-            HttpBeneficiosService::class
+            BenefitsServiceContract::class,
+            HttpBenefitsService::class
+        );
+
+        $this->app->bind(
+            FiltersServiceContract::class,
+            HttpFiltersService::class
+        );
+
+        $this->app->bind(
+            ProfilesServiceContract::class,
+            HttpProfilesService::class
         );
     }
 

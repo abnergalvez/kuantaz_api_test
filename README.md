@@ -10,6 +10,14 @@ The relationship is: a benefit has a filter and a filter has a profile.
 
 The field names of the different resources are in **Spanish**.
 
+An endpoint containing the following information is requested:
+1. Benefits sorted by year.
+2. total amount per year.
+3. Number of benefits per year.
+4. Filter only the benefits that meet the maximum and minimum amounts.
+5. Each benefit must have its own profile.
+6. Sort by year, from highest to lowest.
+
 ## 📦 Installation
 
 There are two ways to run the application (App in Laravel 11):
