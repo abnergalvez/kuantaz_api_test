@@ -74,6 +74,7 @@ The interaction is through an API.
 | GET | api/documentation/ | Show swagger API Documentation |
 
 Notes: 
+- A **Postman** collection file was created with all the specified paths in "documentation/API_Benefits.postman_collection.json"
 - All endpoints are returned in json format, like this one ("data" is the response return):
 ```json
 {

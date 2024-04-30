@@ -13,5 +13,7 @@ RUN apt-get update && apt-get install -y \
 RUN composer install --no-interaction
 RUN php artisan migrate:fresh
 RUN php artisan key:generate
+RUN php artisan l5-swagger:generate
+
 EXPOSE 80
 CMD ["apache2-foreground"]
