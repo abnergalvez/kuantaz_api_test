@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "8a56e99c-94fa-49ba-860e-816f5001b942",
+		"name": "Kuantaz API Benefits",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "4127224"
+	},
+	"item": [
+		{
+			"name": "Processed Benefits (Task)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/api/process_benefits"
+			},
+			"response": []
+		},
+		{
+			"name": "Processed Benefits  by Year (2002 example)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:8000/api/process_benefits/year/2022",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"process_benefits",
+						"year",
+						"2022"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Full Benefits",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/api/benefits"
+			},
+			"response": []
+		},
+		{
+			"name": "Full Filters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/api/filters"
+			},
+			"response": []
+		},
+		{
+			"name": "Full Profiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/api/profiles"
+			},
+			"response": []
+		}
+	]
+}
