@@ -7,4 +7,5 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/beneficios', [ApiBenefitsController::class, 'index'])->name('benefitsApi');
+Route::get('/benefits', [ApiBenefitsController::class, 'index']);
+Route::get('/benefits/year/{year}', [ApiBenefitsController::class, 'getByYear']);

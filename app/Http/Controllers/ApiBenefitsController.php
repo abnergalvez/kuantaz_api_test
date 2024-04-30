@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\ProcessedBenefitsServiceContract;
+use Illuminate\Http\Request;
 
 class ApiBenefitsController extends Controller
 {
@@ -17,29 +18,45 @@ class ApiBenefitsController extends Controller
     {
         try {
             $processedBenefits = $this->processedBenefits->getProcessedBenefits();
-            $benefitsOrdenados = $processedBenefits->sortByDesc('fecha');
-            $benefitsByAnio = $benefitsOrdenados->groupBy(function ($benefit) {
-                return substr($benefit['fecha'], 0, 4);
-            });
-
-            $result = $benefitsByAnio->map(function ($benefits, $year) {
-                $totalAmount = $benefits->sum('monto');
-                $benefitsCount = $benefits->count();
-                return [
-                    'year' => $year,
-                    'total_amount' => $totalAmount,
-                    'num' => $benefitsCount,
-                    'beneficios' => $benefits->toArray()
-                ];
-            });
 
             return response()->json([
                 'code' => 200,
                 'success' => true,
-                'data' => $result->values()->toArray()
+                'data' => $processedBenefits
             ]);
         } catch (\Throwable $th) {
             // TODO: handle exception
+        }
+    }
+
+    public function getByYear(Request $request):  \Illuminate\Http\JsonResponse
+    {
+        try {
+
+            if (!is_numeric($request->year)) {
+                throw new \InvalidArgumentException('El año debe ser un valor numérico entero');
+            }
+
+            $processedBenefits = $this->processedBenefits->getProcessedBenefitsByYear($request->year);
+
+            return response()->json([
+                'code' => 200,
+                'success' => true,
+                'data' => $processedBenefits->toArray()
+            ]);
+
+        } catch (\InvalidArgumentException $ex) {
+            return response()->json([
+                'code' => 400,
+                'success' => false,
+                'message' => 'Dato de Año inválido'
+            ], 400);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'code' => 500,
+                'success' => false,
+                'message' => $th->getMessage()
+            ], 500);
         }
     }
 }

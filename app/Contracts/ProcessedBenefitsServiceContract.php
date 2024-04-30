@@ -2,9 +2,9 @@
 
 namespace App\Contracts;
 
-use Illuminate\Support\Collection;
-
 interface ProcessedBenefitsServiceContract
 {
-    public function getProcessedBenefits(): Collection;
+    public function getProcessedBenefits();
+
+    public function getProcessedBenefitsByYear(int $year);
 }

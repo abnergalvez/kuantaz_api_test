@@ -30,7 +30,7 @@ class ProcessedBenefitsService implements ProcessedBenefitsServiceContract
         $filters = collect($this->filtersService->getFilters());
         $profiles = collect($this->profilesService->getProfiles());
 
-        return $processedBenefits = $benefits->map(function ($benefit) use ($filters, $profiles) {
+        $processedBenefits = $benefits->map(function ($benefit) use ($filters, $profiles) {
             $filter = $filters->firstWhere('id_programa', $benefit['id_programa']);
             $profile = $profiles->firstWhere('id', $filter['ficha_id']);
             $benefit['view'] = true;
@@ -46,5 +46,35 @@ class ProcessedBenefitsService implements ProcessedBenefitsServiceContract
             }
         })->filter();
 
+        $benefitsOrdenados = $processedBenefits->sortByDesc('ano');
+        $benefitsByAnio = $benefitsOrdenados->groupBy(function ($benefit) {
+            return $benefit['ano'];
+        });
+
+        return $benefitsByAnio->map(function ($benefits, $year) {
+            $totalAmount = $benefits->sum('monto');
+            $benefitsCount = $benefits->count();
+            return [
+                'year' => $year,
+                'total_amount' => $totalAmount,
+                'num' => $benefitsCount,
+                'beneficios' => $benefits->toArray()
+            ];
+        });
+
+    }
+
+    public function getProcessedBenefitsByYear(int $year): Collection
+    {
+        $processedBenefits = $this->getProcessedBenefits();
+
+        $benefitsByYear = $processedBenefits->filter(function ($benefit) use ($year) {
+            return $benefit['year'] == $year;
+        });
+
+        if (!$benefitsByYear->has($year)) {
+            return collect();
+        }
+        return collect($benefitsByYear);
     }
 }
