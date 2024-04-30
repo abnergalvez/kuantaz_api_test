@@ -1,4 +1,4 @@
-# "Benefits, filters & profiles"  🏷️ [tag version]
+# "Benefits, filters & profiles"  🏷️ [v1.0.0]
 
 Technical test of "Kuantaz", for Laravel PHP Developer position, which consists of querying 3 endpoints "benefits", "filters" and "profiles" (external api), which are related and must be processed using laravel collections functions.
 
