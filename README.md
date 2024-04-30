@@ -34,11 +34,14 @@ Dependencies: Composer and PHP 8.2 or higher.
     ```
 - You must copy .env.example to .env:
 
+- Run configure database (clean sqlite) aplication 
+    ```bash
+    php artisan migrate:fresh
+    ```
 - Run configure key aplication
     ```bash
     php artisan key:generate
     ```
-
 - Run the application with the following command:
     ```bash
     php artisan serve
