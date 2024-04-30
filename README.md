@@ -75,12 +75,13 @@ The interaction is through an API.
 
 Notes: 
 - All endpoints are returned in json format, like this one ("data" is the response return):
+```json
 {
     "code": (int),
     "success": (boolean),
     "data": [{...}]
 }
-
+```
 - The root path of the project, redirects to "api/process_benefits/".
 
 ## ☝ Assumptions, conventions and future improvements
@@ -94,7 +95,7 @@ Notes:
     - Improve the architecture, maybe apply something like “clean architecture” that allows to integrate other endpoints.   
     - Unify and improve exception handling.
 
-    
+
 ## 🧪 Teststing
 
 The Unit tests are written in PHPunit format:
