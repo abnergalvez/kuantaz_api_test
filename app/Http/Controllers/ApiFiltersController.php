@@ -13,7 +13,21 @@ class ApiFiltersController extends Controller
         $this->filtersService = $filtersService;
     }
 
-
+    /**
+     * Display a original list of Filters.
+     *
+     * @OA\Get(
+     *     path="/api/filters",
+     *     summary="Get all original filters (only filters)",
+     *     tags={"Original Filters"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of original filters",
+     *         @OA\JsonContent(type="array", @OA\Items(ref=""))
+     *     ),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
     public function index() : \Illuminate\Http\JsonResponse
     {
         try {

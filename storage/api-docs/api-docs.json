@@ -1,0 +1,163 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Benefits, Filters & Profiles API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/benefits": {
+            "get": {
+                "tags": [
+                    "Original Benefits"
+                ],
+                "summary": "Get all original benefits (only benefits)",
+                "description": "Display a original list of benefits.",
+                "operationId": "d09fbec9b49b531117ed9385d02c431f",
+                "responses": {
+                    "200": {
+                        "description": "List of original benefits",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": ""
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/filters": {
+            "get": {
+                "tags": [
+                    "Original Filters"
+                ],
+                "summary": "Get all original filters (only filters)",
+                "description": "Display a original list of Filters.",
+                "operationId": "2c46e100a95c2a1fd67b39904793bff7",
+                "responses": {
+                    "200": {
+                        "description": "List of original filters",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": ""
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/process_benefits": {
+            "get": {
+                "tags": [
+                    "Processed Benefits"
+                ],
+                "summary": "Get all processed benefits",
+                "description": "Display a listing of the processed benefits.",
+                "operationId": "e5c9fe5d3291c9c0fd22fb686fe05803",
+                "responses": {
+                    "200": {
+                        "description": "List of processed benefits",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": ""
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/process_benefits/year/{year}": {
+            "get": {
+                "tags": [
+                    "Processed Benefits By Year"
+                ],
+                "summary": "Get processed benefits filtered by year",
+                "description": "Display a listing of the benefits processed By Year.",
+                "operationId": "7da0bacf07411eb6cde2911c57c9748e",
+                "parameters": [
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "description": "Year to filter processed benefits",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of processed benefits by year",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": ""
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid year provided"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/profiles": {
+            "get": {
+                "tags": [
+                    "Original Profiles"
+                ],
+                "summary": "Get all original profiles (only profiles)",
+                "description": "Display a original list of Profiles.",
+                "operationId": "dedce2b9842054c890ea86e28e6f02fb",
+                "responses": {
+                    "200": {
+                        "description": "List of original profiles",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": ""
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        }
+    }
+}

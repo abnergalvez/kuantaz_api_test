@@ -6,7 +6,7 @@ use App\Http\Controllers\ApiProfilesController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'process_benefits'], function () {
-    Route::get('/', [ApiProcessBenefitsController::class, 'index']);
+    Route::get('/', [ApiProcessBenefitsController::class, 'index'])->name('benefistProcessed');
     Route::get('/year/{year}', [ApiProcessBenefitsController::class, 'getByYear']);
 });
 

@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Contracts\ProcessedBenefitsServiceContract;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Info(
+ *     title="Benefits, Filters & Profiles API",
+ *     version="1.0"
+ * )
+ */
 class ApiProcessBenefitsController extends Controller
 {
     protected $processedBenefits;
@@ -14,6 +20,21 @@ class ApiProcessBenefitsController extends Controller
         $this->processedBenefits = $processedBenefits;
     }
 
+    /**
+     * Display a listing of the processed benefits.
+     *
+     * @OA\Get(
+     *     path="/api/process_benefits",
+     *     summary="Get all processed benefits",
+     *     tags={"Processed Benefits"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of processed benefits",
+     *         @OA\JsonContent(type="array", @OA\Items(ref=""))
+     *     ),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
     public function index() : \Illuminate\Http\JsonResponse
     {
         try {
@@ -25,13 +46,35 @@ class ApiProcessBenefitsController extends Controller
             ]);
         } catch (\Throwable $th) {
             return response()->json([
-                'code' => $th->getCode(),
+                'code' => 500,
                 'success' => false,
                 'message' => $th->getMessage()
-            ], $th->getCode());
+            ], 500);
         }
     }
-
+    /**
+     * Display a listing of the benefits processed By Year.
+     *
+     * @OA\Get(
+     *     path="/api/process_benefits/year/{year}",
+     *     summary="Get processed benefits filtered by year",
+     *     tags={"Processed Benefits By Year"},
+     *     @OA\Parameter(
+     *         name="year",
+     *         in="path",
+     *         required=true,
+     *         description="Year to filter processed benefits",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of processed benefits by year",
+     *         @OA\JsonContent(type="array", @OA\Items(ref=""))
+     *     ),
+     *     @OA\Response(response=400, description="Invalid year provided"),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
     public function getByYear(Request $request):  \Illuminate\Http\JsonResponse
     {
         try {

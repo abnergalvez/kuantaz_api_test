@@ -13,7 +13,21 @@ class ApiProfilesController extends Controller
         $this->profilesService = $profilesService;
     }
 
-
+    /**
+     * Display a original list of Profiles.
+     *
+     * @OA\Get(
+     *     path="/api/profiles",
+     *     summary="Get all original profiles (only profiles)",
+     *     tags={"Original Profiles"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of original profiles",
+     *         @OA\JsonContent(type="array", @OA\Items(ref=""))
+     *     ),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
     public function index() : \Illuminate\Http\JsonResponse
     {
         try {
