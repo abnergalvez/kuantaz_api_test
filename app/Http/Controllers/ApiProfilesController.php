@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\BenefitsServiceContract;
+use App\Contracts\ProfilesServiceContract;
 
-class ApiBenefitsController extends Controller
+class ApiProfilesController extends Controller
 {
-    protected $benefitsService;
+    protected $profilesService;
 
-    public function __construct(BenefitsServiceContract $benefitsService)
+    public function __construct(ProfilesServiceContract $profilesService)
     {
-        $this->benefitsService = $benefitsService;
+        $this->profilesService = $profilesService;
     }
 
 
     public function index() : \Illuminate\Http\JsonResponse
     {
         try {
-            $fullBenefits = $this->benefitsService->getBenefits();
+            $fullProfiles = $this->profilesService->getProfiles();
             return response()->json([
                 'code' => 200,
                 'success' => true,
-                'data' => $fullBenefits
+                'data' => $fullProfiles
             ]);
         } catch (\Throwable $th) {
             return response()->json([

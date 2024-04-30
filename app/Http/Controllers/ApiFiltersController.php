@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\BenefitsServiceContract;
+use App\Contracts\FiltersServiceContract;
 
-class ApiBenefitsController extends Controller
+class ApiFiltersController extends Controller
 {
-    protected $benefitsService;
+    protected $filtersService;
 
-    public function __construct(BenefitsServiceContract $benefitsService)
+    public function __construct(FiltersServiceContract $filtersService)
     {
-        $this->benefitsService = $benefitsService;
+        $this->filtersService = $filtersService;
     }
 
 
     public function index() : \Illuminate\Http\JsonResponse
     {
         try {
-            $fullBenefits = $this->benefitsService->getBenefits();
+            $fullFilters = $this->filtersService->getFilters();
             return response()->json([
                 'code' => 200,
                 'success' => true,
-                'data' => $fullBenefits
+                'data' => $fullFilters
             ]);
         } catch (\Throwable $th) {
             return response()->json([
