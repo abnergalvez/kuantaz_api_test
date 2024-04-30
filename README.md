@@ -20,7 +20,7 @@ An endpoint containing the following information is requested:
 
 ## 📦 Installation
 
-There are two ways to run the application (App in Laravel 11):
+There are two ways to install and run the application (App in Laravel 11):
 
 **A) Server integrated in Application:**
 
@@ -60,48 +60,76 @@ Dependencies: Need Docker Desktop or similar.
 
 - At the end you can Access http://localhost:8000/
 
-## 💻 Usage
+## 💻 Usage & API Documentation.
 
-The interaction is through an API and also the error information.
-
+The interaction is through an API.
 
 | **Method** | **Route** | **Description** |
 |:----------|:----------|:----------|
-| GET | api/benefits/ |   |
+| GET | api/process_benefits/ | Show all processed benefits (main requirement )  |
+| GET | api/process_benefits/year/{year} | Show all processed benefits for specific year e."{2023}" |
+| GET | api/benefits/ | Show all original benefits  |
+| GET | api/filters/ | Show all original filters |
+| GET | api/profiles/ | Show all original profiles |
+| GET | api/documentation/ | Show swagger API Documentation |
 
-- The format of the response is: 
-- The format of the error is: 
+Notes: 
+- All endpoints are returned in json format, like this one ("data" is the response return):
+{
+    "code": (int),
+    "success": (boolean),
+    "data": [{...}]
+}
+
+- The root path of the project, redirects to "api/process_benefits/".
 
 ## ☝ Assumptions, conventions and future improvements
 
+- It was assumed that the requirements were needed at a single endpoint,but other endpoints were created to deliver more information and understanding about the same.
 - For the commit management I used "conventional commits" (https://www.conventionalcommits.org/en/v1.0.0/).
+- Tests were created to test the different requirements of the main endpoint, as well as to test services and contracts, in a simple way (happy path).
+- A docker environment was created to better manage the dependencies (because of my work in local) and an easier option to run the application.
+- Future improvements could include: 
+    - Add more tests, especially of “unhappy path”. and exceptions.
+    - Improve the architecture, maybe apply something like “clean architecture” that allows to integrate other endpoints.   
+    - Unify and improve exception handling.
 
-## 📖 API Documentation.
-
+    
 ## 🧪 Teststing
 
-The Unit tests are written in PHPunit format in the file: ......
- three were created:
+The Unit tests are written in PHPunit format:
 
-- HAPPY PATH
-- UNHAPPY PATH
-- UNHAPPY PATH
+Controller tests (N2N or Feature) were written (tests\Feature\ApiProcessBenefitsControllerTest.php)
+- get status200
+- get correct structure
+- get correct year order desc
+- correct count number by year
+- correct total amount by year
+- if has profile data
+- if filtered correctly
+- if dates correct in get by year 2023
 
-Controller tests (N2N) were also written (test/....php)
+Unit tests for http services were also written (tests\Unit\Services\HttpServicesTest)
+- get http service benefitst.
+- get http service filters.
+- get http service profiles. 
 
--  HAPPY PATH
--  UNHAPPY PATH
+Unit tests for interface/contracts were also written (tests\Unit\Contracts\ServiceContractsTest.php)
+- benefits service implements contract.
+- filters service implements contract.
+- profiles service implements contract. 
 
 to run all tests must be executed in the project:
 
 ```bash
-.\vendor\bin\phpunit --testdox 
+php artisan test
 ```
 
 ## 👥 Authors
 
 Abner Galvez C., using PHP 8.2 & Laravel 11
 
+
 ## 🛠️ Project status
 
-- , awaiting review.
+Complete , awaiting review.
