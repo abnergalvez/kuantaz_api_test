@@ -9,13 +9,10 @@ class HttpBenefitsServiceTest extends TestCase
 {
     public function testGetBenefitsReturnExpectedResponse()
     {
-        // Arrange
         $benefitsService = new HttpBenefitsService();
 
-        // Act
         $benefits = $benefitsService->getBenefits();
 
-        // Assert
         $this->assertIsArray($benefits);
     }
 }
